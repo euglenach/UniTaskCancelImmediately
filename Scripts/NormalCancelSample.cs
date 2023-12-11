@@ -16,12 +16,13 @@ namespace UniTaskCancelImmediately
                 await UniTask.Delay(1000, cancellationToken: cts.Token);
             } catch(OperationCanceledException)
             {
-                Debug.Log($"DelayAfterFrame:{Time.frameCount}");
+                Debug.Log($"CanceledFrame:{Time.frameCount}");
             }
         }
 
         private void LateUpdate()
         {
+            Debug.Log($"LateUpdateFrame:{Time.frameCount}");
             cts.Cancel();
         }
     }

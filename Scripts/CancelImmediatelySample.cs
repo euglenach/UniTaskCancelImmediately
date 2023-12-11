@@ -15,14 +15,15 @@ namespace UniTaskCancelImmediately
             try
             {
                 await UniTask.Delay(1000, cancellationToken: cts.Token, cancelImmediately: true);
-            } catch(OperationCanceledException)
+            } catch(OperationCanceledException e)
             {
-                Debug.Log($"DelayAfterFrame:{Time.frameCount}");
+                Debug.Log($"CanceledFrame:{Time.frameCount}");
             }
         }
 
         private void LateUpdate()
         {
+            Debug.Log($"LateUpdateFrame:{Time.frameCount}");
             cts.Cancel();
         }
     }
