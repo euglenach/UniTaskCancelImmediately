@@ -22,7 +22,7 @@ namespace UniTaskCancelImmediately
 
         private void LateUpdate()
         {
-            Debug.Log($"LateUpdateFrame:{Time.frameCount}");
+            // Debug.Log($"LateUpdateFrame:{Time.frameCount}");
             cts.Cancel();
         }
     }

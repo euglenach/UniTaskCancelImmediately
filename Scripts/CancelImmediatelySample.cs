@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace UniTaskCancelImmediately
 {
-
     public class CancelImmediatelySample : MonoBehaviour
     {
         private readonly CancellationTokenSource cts = new();
@@ -14,8 +13,9 @@ namespace UniTaskCancelImmediately
             Debug.Log($"DelayAfterFrame:{Time.frameCount}");
             try
             {
+                // cancelImmediatelyオプションを設定する
                 await UniTask.Delay(1000, cancellationToken: cts.Token, cancelImmediately: true);
-            } catch(OperationCanceledException e)
+            } catch(OperationCanceledException)
             {
                 Debug.Log($"CanceledFrame:{Time.frameCount}");
             }
@@ -23,7 +23,6 @@ namespace UniTaskCancelImmediately
 
         private void LateUpdate()
         {
-            Debug.Log($"LateUpdateFrame:{Time.frameCount}");
             cts.Cancel();
         }
     }
