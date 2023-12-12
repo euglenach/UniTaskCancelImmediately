@@ -14,11 +14,11 @@ namespace UniTaskCancelImmediately
 
             try
             {
-                await UniTask.Delay(10000, cancellationToken: cancellationToken, cancelImmediately:true);
+                await UniTask.Delay(10000, cancellationToken: cancellationToken, cancelImmediately: true);
 
-                await UniTask.DelayFrame(10000, cancellationToken: cancellationToken, cancelImmediately:true);
+                await UniTask.DelayFrame(10000, cancellationToken: cancellationToken, cancelImmediately: true);
 
-                await UniTask.Yield(cancellationToken, cancelImmediately:true);
+                await UniTask.Yield(cancellationToken, cancelImmediately: true);
             }
             finally
             {
