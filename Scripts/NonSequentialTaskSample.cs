@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace UniTaskCancelImmediately
 {
-    public class SequentialTaskSample : MonoBehaviour
+    public class NonSequentialTaskSample : MonoBehaviour
     {
         private bool isDuringNanka;
         async UniTask NankaAsync(CancellationToken cancellationToken)
@@ -14,11 +13,11 @@ namespace UniTaskCancelImmediately
 
             try
             {
-                await UniTask.Delay(10000, cancellationToken: cancellationToken, cancelImmediately:true);
+                await UniTask.Delay(10000, cancellationToken: cancellationToken);
 
-                await UniTask.DelayFrame(10000, cancellationToken: cancellationToken, cancelImmediately:true);
+                await UniTask.DelayFrame(10000, cancellationToken: cancellationToken);
 
-                await UniTask.Yield(cancellationToken, cancelImmediately:true);
+                await UniTask.Yield(cancellationToken);
             }
             finally
             {
