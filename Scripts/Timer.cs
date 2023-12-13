@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -9,6 +6,10 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private Text timeText;
+    [SerializeField] private Button button;
+    [SerializeField] private Toggle cancelImmediatelyToggle;
+    
+    private CancellationTokenSource timerCancellation;
     
     async UniTask CountdownAsync(float seconds, CancellationToken cancellationToken)
     {
@@ -25,7 +26,7 @@ public class Timer : MonoBehaviour
                 if(seconds <= 0) break;
                 
                 // cancelImmediately falseで待つ
-                await UniTask.NextFrame(cancellationToken, cancelImmediately: true);
+                await UniTask.NextFrame(cancellationToken, cancelImmediately: cancelImmediatelyToggle.isOn);
             }
         } finally
         {
@@ -33,9 +34,6 @@ public class Timer : MonoBehaviour
             if(timeText) timeText.color = Color.white;
         }
     }
-
-    [SerializeField] private Button button;
-    private CancellationTokenSource timerCancellation;
     
     private void Start()
     {
